@@ -1,0 +1,6 @@
+---
+- name: Create symlink
+  file:
+    state=link force=yes
+    src={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}
+    path={{deploy.project.root}}/current

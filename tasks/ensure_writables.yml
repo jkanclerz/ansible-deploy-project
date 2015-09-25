@@ -1,0 +1,4 @@
+---
+- name: Ensure writable directory
+  command: chmod 777 {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item}}
+  with_items: deploy.project.writable_dirs

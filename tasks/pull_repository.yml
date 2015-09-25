@@ -1,0 +1,14 @@
+---
+- name: Pull sources from the repository.
+  git:
+    repo={{deploy.project.repo}}
+    dest={{deploy.project.root}}/shared/cached-copy
+    version={{deploy.project.branch}}
+    accept_hostkey=yes
+  when: deploy.project.scm == "git"
+
+- name: Create release directory
+  command: cp -r {{deploy.project.root}}/shared/cached-copy {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}
+  args:
+    chdir: "{{deploy.project.root}}/shared"
+

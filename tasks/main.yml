@@ -1,0 +1,5 @@
+---
+- include: register_variables.yml
+- include: pull_repository.yml
+- include: ensure_writables.yml
+- include: link_shared.yml

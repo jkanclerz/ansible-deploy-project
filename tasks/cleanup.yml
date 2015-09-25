@@ -1,0 +1,6 @@
+---
+- name: Create release directory
+  file:
+    path={{deploy.project.root}}/shared/cached-copy
+    state=absent
+

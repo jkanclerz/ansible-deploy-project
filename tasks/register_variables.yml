@@ -1,0 +1,10 @@
+- name: Register release variable
+  shell: date +%Y%m%d%H%M%S
+  register: project_deploy_date
+
+- name: Register last release
+  shell: ls | tail -n1
+  args:
+    chdir: "{{deploy.project.root}}/releases"
+  register: last_release
+
