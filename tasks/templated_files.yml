@@ -1,0 +1,8 @@
+---
+- name: Install shared files
+  template: 
+    src: "{{ item.source }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"    
+    group: "{{ item.owner }}"
+  with_items: deploy.project.templated_files

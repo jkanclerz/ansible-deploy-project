@@ -1,0 +1,13 @@
+---
+deploy:
+  project:
+    root: '/tmp'
+    name: 'Default Name'
+    scm: 'git'
+    repo: 'repo addres'
+    branch: 'master'
+    keep_previous_releases: 3
+    writable_dirs: []
+    shared_dirs: []
+    shared_files: []
+    templated_files: []
