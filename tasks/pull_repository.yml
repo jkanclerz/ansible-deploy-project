@@ -7,6 +7,10 @@
     accept_hostkey=yes
   when: deploy.project.scm == "git"
 
+- name: Copying from local source
+  synchronize: src={{deploy.project.source}} dest={{deploy.project.root}}/shared/cached-copy
+  when: deploy.project.scm == "rsync"
+
 - name: Create release directory
   command: cp -r {{deploy.project.root}}/shared/cached-copy {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}
   args:
