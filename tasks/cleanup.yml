@@ -1,6 +1,0 @@
----
-- name: remove cached copy
-  file:
-    path={{deploy.project.root}}/shared/cached-copy
-    state=absent
-

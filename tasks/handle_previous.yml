@@ -1,0 +1,6 @@
+---
+- name: Copy previous source code
+  command: cp -r {{deploy.project.root}}/releases/{{current_release}} {{deploy.project.root}}/shared/cached-copy
+  when: deploy.project.copy_previous_release == True
+
+

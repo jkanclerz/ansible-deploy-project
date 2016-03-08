@@ -1,5 +1,6 @@
 ---
 - include: register_variables.yml
+- include: handle_previous.yml
 - include: pull_repository.yml
 - include: templated_files.yml
 - include: link_shared.yml

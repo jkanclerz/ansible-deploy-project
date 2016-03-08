@@ -8,3 +8,11 @@
     chdir: "{{deploy.project.root}}/releases"
   register: last_release
 
+- name: Create variable.
+  set_fact:
+    next_release: "{{ project_deploy_date.stdout }}"
+
+- name: Create variable.
+  set_fact:
+    current_release: "{{ last_release.stdout }}"
+
