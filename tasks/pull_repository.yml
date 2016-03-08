@@ -12,7 +12,7 @@
   when: deploy.project.scm == "rsync"
 
 - name: Create release directory
-  command: cp -r {{deploy.project.root}}/shared/cached-copy {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}
+  command: mv {{deploy.project.root}}/shared/cached-copy {{deploy.project.root}}/releases/{{next_release}}
   args:
     chdir: "{{deploy.project.root}}/shared"
 
