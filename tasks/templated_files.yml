@@ -2,7 +2,7 @@
 - name: Install shared files
   template: 
     src: "{{ item.source }}"
-    dest: "{{ item.dest }}"
+    dest: "{{deploy.project.root}}/releases/{{next_release}}/{{ item.dest }}"
     owner: "{{ item.owner }}"    
     group: "{{ item.owner }}"
-  with_items: deploy.project.templated_files
+  with_items: "{{deploy.project.templated_files}}"
