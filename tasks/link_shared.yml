@@ -3,32 +3,32 @@
   file:
     state=directory
     path="{{deploy.project.root}}/shared/{{item}}"
-  with_items: deploy.project.shared_dirs
+  with_items: "{{deploy.project.shared_dirs}}"
 
 - name: Create shared children dirs
   shell: mkdir -p {{item}}
   args:
     chdir: "{{deploy.project.root}}/releases/{{project_deploy_date.stdout}}"
-  with_items: deploy.project.shared_dirs
+  with_items: "{{deploy.project.shared_dirs}}"
 
 - name: Remove colision
   file:
     path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item}}
     state=absent
-  with_items: deploy.project.shared_dirs
+  with_items: "{{deploy.project.shared_dirs}}"
   ignore_errors: yes
 
 - name: Creating symlinks for shared directories
   command: ln -nfs {{deploy.project.root}}/shared/{{item}} {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item}}
-  with_items: deploy.project.shared_dirs
+  with_items: "{{deploy.project.shared_dirs}}"
 
 - name: Create share children files
   shell: mkdir -p $(dirname {{item}}) && touch {{item}}
   args:
     chdir: "{{deploy.project.root}}/shared"
-  with_items: deploy.project.shared_files
+  with_items: "{{deploy.project.shared_files}}"
 
 - name: Linking share children files
   shell: ln -nfs {{deploy.project.root}}/shared/{{item}} {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item}}
-  with_items: deploy.project.shared_files
+  with_items: "{{deploy.project.shared_files}}"
 

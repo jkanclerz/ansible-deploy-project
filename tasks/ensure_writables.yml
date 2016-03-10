@@ -1,5 +1,5 @@
 ---
 - name: Ensure writable directory
   file: path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item}} state=directory mode=0777
-  with_items: deploy.project.writable_dirs
+  with_items: "{{deploy.project.writable_dirs}}"
   ignore_errors: yes
