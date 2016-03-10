@@ -8,7 +8,7 @@
   when: deploy.project.scm == "git"
 
 - name: Copying from local source
-  synchronize: src={{deploy.project.source}} dest={{deploy.project.root}}/shared/cached-copy
+  synchronize: src="{{deploy.project.source}}" dest="{{deploy.project.root}}/shared/cached-copy"
   when: deploy.project.scm == "rsync"
 
 - name: Create release directory
