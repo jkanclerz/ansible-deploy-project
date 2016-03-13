@@ -43,7 +43,6 @@
   with_items: "{{deploy.project.writable_dirs}}"
   ignore_errors: yes
   when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod")
-  when:
 
 - name: Ensure writable directory
   file:
