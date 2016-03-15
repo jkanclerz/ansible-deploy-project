@@ -11,6 +11,8 @@
   synchronize:
     src: "{{deploy.project.source}}"
     dest: "{{deploy.project.root}}/shared/cached-copy"
+    owner: no
+    group: no
     delete: yes
   when: deploy.project.scm == "rsync"
 
@@ -18,4 +20,3 @@
   command: mv {{deploy.project.root}}/shared/cached-copy {{deploy.project.root}}/releases/{{next_release}}
   args:
     chdir: "{{deploy.project.root}}/shared"
-
