@@ -1,10 +1,4 @@
 ---
-- name: Create share children dirs
-  file:
-    state=directory
-    path="{{deploy.project.root}}/shared/{{item}}"
-  with_items: "{{deploy.project.shared_dirs}}"
-
 - name: Create shared children dirs
   shell: mkdir -p {{item}}
   args:
