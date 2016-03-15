@@ -1,0 +1,11 @@
+---
+- name: Ensure writable directory CHMOD+A recurse
+  command: chmod -R +a "{{http_user}} allow delete,write,append,file_inherit,directory_inherit" {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
+  with_items: "{{deploy.project.writable_dirs}}"
+  when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod+a")
+
+- name: Ensure writable directory CHMOD+A
+  command: chmod +a "{{http_user}} allow delete,write,append,file_inherit,directory_inherit" {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
+  with_items: "{{deploy.project.writable_dirs}}"
+  when: (((item.recurse is defined) and (item.recurse == "no")) or (item.recurse is not defined)) and (permission_model == "chmod+a")
+

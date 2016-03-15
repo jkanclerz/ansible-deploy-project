@@ -1,0 +1,10 @@
+---
+- name: Ensure writable directory ACL recurse
+  command: setfacl -R -m u:"{{http_user}}":rwX -m u:{{ansible_ssh_user}}:rwX {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
+  with_items: "{{deploy.project.writable_dirs}}"
+  when: ((item.recurse is defined) and (item.recurse == 'yes')) and (permission_model == "acl")
+
+- name: Ensure writable directory ACL
+  command: setfacl -m u:"{{http_user}}":rwX -m u:{{ansible_ssh_user}}:rwX {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
+  with_items: "{{deploy.project.writable_dirs}}"
+  when: (((item.recurse is defined) and (item.recurse == "no")) or (item.recurse is not defined)) and (permission_model == "acl")
