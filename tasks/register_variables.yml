@@ -27,10 +27,6 @@
   shell: echo $(basename {{ current_release_path }})
   register: last_release
 
-- name: debug name
-  debug: msg="{{current_release_path}}"
-  when: current_release_exists
-
 - name: Create variable.
   set_fact:
     next_release: "{{ project_deploy_date.stdout }}"
