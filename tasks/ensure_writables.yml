@@ -47,8 +47,8 @@
     state=directory
     mode=0777
     recurse=yes
+    follow=yes
   with_items: "{{deploy.project.writable_dirs}}"
-  ignore_errors: yes
   when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod")
 
 - name: Ensure writable directory CHMOD ACL
@@ -56,6 +56,6 @@
     path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
     state=directory
     mode=0777
+    follow=yes
   with_items: "{{deploy.project.writable_dirs}}"
-  ignore_errors: yes
   when: (((item.recurse is defined) and (item.recurse == "no")) or (item.recurse is not defined)) and (permission_model == "chmod+a")
