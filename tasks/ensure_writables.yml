@@ -14,27 +14,34 @@
     http_user: "{{http_user_checking.stdout}}"
   when: (permission_model == "acl") or (permission_model == "chmod+a")
 
-- name: set acl recurse
+- name: Ensure directory exists
+  file:
+    path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
+    state=directory
+  with_items: "{{deploy.project.writable_dirs}}"
+  ignore_errors: yes
+
+- name: Ensure writable directory ACL recurse
   command: setfacl -R -m u:"{{http_user}}":rwX -m u:{{ansible_ssh_user}}:rwX {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
   with_items: "{{deploy.project.writable_dirs}}"
   when: ((item.recurse is defined) and (item.recurse == 'yes')) and (permission_model == "acl")
 
-- name: set acl
+- name: Ensure writable directory ACL
   command: setfacl -m u:"{{http_user}}":rwX -m u:{{ansible_ssh_user}}:rwX {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
   with_items: "{{deploy.project.writable_dirs}}"
   when: (((item.recurse is defined) and (item.recurse == "no")) or (item.recurse is not defined)) and (permission_model == "acl")
 
-- name: set chmoda recurse
+- name: Ensure writable directory CHMOD+A recurse
   command: chmod -R +a "{{http_user}} allow delete,write,append,file_inherit,directory_inherit" {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
   with_items: "{{deploy.project.writable_dirs}}"
   when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod+a")
 
-- name: set chmoda
+- name: Ensure writable directory CHMOD+A
   command: chmod +a "{{http_user}} allow delete,write,append,file_inherit,directory_inherit" {{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
   with_items: "{{deploy.project.writable_dirs}}"
   when: (((item.recurse is defined) and (item.recurse == "no")) or (item.recurse is not defined)) and (permission_model == "chmod+a")
 
-- name: Ensure writable directory recurse
+- name: Ensure writable directory CHMOD recurse
   file:
     path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
     state=directory
@@ -44,7 +51,7 @@
   ignore_errors: yes
   when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod")
 
-- name: Ensure writable directory
+- name: Ensure writable directory CHMOD ACL
   file:
     path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
     state=directory
