@@ -16,5 +16,6 @@
     state=directory
     mode=0777
     follow=yes
+  ignore_errors: yes
   with_items: "{{deploy.project.writable_dirs}}"
   when: (((item.recurse is defined) and (item.recurse == "no")) or (item.recurse is not defined)) and (permission_model == "chmod")
