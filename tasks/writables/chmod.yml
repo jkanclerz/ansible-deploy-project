@@ -7,6 +7,7 @@
     recurse=yes
     follow=yes
   with_items: "{{deploy.project.writable_dirs}}"
+  ignore_errors: yes
   when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod")
 
 - name: Ensure writable directory CHMOD ACL
