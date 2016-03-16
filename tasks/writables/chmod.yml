@@ -10,7 +10,7 @@
   ignore_errors: yes
   when: ((item.recurse is defined) and (item.recurse == "yes")) and (permission_model == "chmod")
 
-- name: Ensure writable directory CHMOD ACL
+- name: Ensure writable directory CHMOD
   file:
     path={{deploy.project.root}}/releases/{{project_deploy_date.stdout}}/{{item.src}}
     state=directory
