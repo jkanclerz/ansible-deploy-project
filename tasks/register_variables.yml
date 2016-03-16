@@ -26,6 +26,7 @@
 - name: Register last basename
   shell: echo $(basename {{ current_release_path }})
   register: last_release
+  when: current_release_exists
 
 - name: Create variable.
   set_fact:
@@ -34,4 +35,5 @@
 - name: Create variable.
   set_fact:
     current_release: "{{ last_release.stdout }}"
+  when: current_release_exists
 
