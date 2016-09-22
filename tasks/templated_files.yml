@@ -4,5 +4,5 @@
     src: "{{ item.source }}"
     dest: "{{deploy.project.root}}/releases/{{next_release}}/{{ item.dest }}"
     owner: "{{ item.owner }}"    
-    group: "{{ item.owner }}"
+    group: "{{ item.group }}"
   with_items: "{{deploy.project.templated_files}}"
