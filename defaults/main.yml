@@ -11,3 +11,4 @@ deploy:
     shared_dirs: []
     shared_files: []
     templated_files: []
+    rsync_opts: []
