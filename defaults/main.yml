@@ -6,6 +6,8 @@ deploy:
     scm: 'git'
     repo: 'repo addres'
     branch: 'master'
+    copy_previous_release: True
+    copy_previous_opts: []
     keep_previous_releases: 3
     writable_dirs: []
     shared_dirs: []
