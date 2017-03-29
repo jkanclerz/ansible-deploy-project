@@ -14,3 +14,5 @@ deploy:
     shared_files: []
     templated_files: []
     rsync_opts: []
+
+__deploy_project_link_shared_task: link_shared.yml
